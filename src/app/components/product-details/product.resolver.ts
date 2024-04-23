@@ -1,8 +1,8 @@
-import {ActivatedRouteSnapshot, RouterStateSnapshot, ResolveFn} from '@angular/router';
-import {catchError, delay} from 'rxjs';
+import {ActivatedRouteSnapshot, ResolveFn} from '@angular/router';
+import {catchError} from 'rxjs';
 import {IProduct} from "../../models/product";
 import {ProductsService} from "../../services/products-service";
-import {inject, Inject} from "@angular/core";
+import {inject} from "@angular/core";
 import {Router} from "@angular/router";
 
 export const catalogResolver: ResolveFn<IProduct[] | boolean> = (route: ActivatedRouteSnapshot) => {

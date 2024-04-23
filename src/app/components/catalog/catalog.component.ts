@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductsService} from "../../services/products-service";
 import {IProduct} from "../../models/product";
-import {delay, Subscription} from "rxjs";
-import {ActivatedRoute} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-catalog',

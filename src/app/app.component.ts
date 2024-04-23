@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {filter, map, mapTo, merge, Observable} from "rxjs";
+import {filter, map, merge, Observable} from "rxjs";
 import {ResolveEnd, ResolveStart, Router} from "@angular/router";
 
 @Component({
