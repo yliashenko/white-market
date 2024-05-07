@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {CatalogService} from "../../services/catalog-service";
-import {delay, map, startWith} from "rxjs";
-import {UserService} from "../../services/user.service";
-import {AuthService} from "../../services/auth.service";
+import {startWith} from "rxjs";
 
 @Component({
   selector: 'app-catalog',

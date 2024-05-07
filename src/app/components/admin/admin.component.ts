@@ -15,8 +15,6 @@ import {AdminService} from "../../services/admin.service";
 export class AdminComponent implements OnInit {
 
   @Output() cartsList: ICart[] = [];
-  private cartsListWithPrices: ICart[] = [];
-
   constructor(
     private adminService: AdminService,
     private cartService: CartService,

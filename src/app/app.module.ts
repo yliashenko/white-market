@@ -39,7 +39,7 @@ import {
   MatTable
 } from "@angular/material/table";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatButtonToggle, MatButtonToggleGroup, MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatButtonToggle, MatButtonToggleGroup} from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [

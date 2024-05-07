@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {IAddToCart, ICart, IUpdateProductInCart} from "../models/cart";
+import {ICart} from "../models/cart";
 import {Url} from "../app.config";
 import {IProduct} from "../models/product";
 import {BehaviorSubject} from "rxjs";

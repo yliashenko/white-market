@@ -40,7 +40,7 @@ export class AuthService {
 
         if (data.token) {
           this.saveToken(data.token);
-          this.saveUserName(userLoginDto.username);
+          this.saveUserName();
           this.updateAuthStatus(true);
 
           this.userService.getAllUsers()
@@ -76,7 +76,7 @@ export class AuthService {
     this.updateAuthStatus(false);
   }
 
-  saveUserName(userName: string) {
+  saveUserName() {
     localStorage.setItem('username', this.currentUserName);
   }
 

@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {filter, map, merge, Observable} from "rxjs";
 import {ResolveEnd, ResolveStart, Router} from "@angular/router";
-import {IUserDetails} from "./models/users";
-import {UserService} from "./services/user.service";
 
 @Component({
   selector: 'app-root',

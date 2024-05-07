@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../../services/auth.service";
 import {CartService} from "../../../services/cart.service";
-import {BehaviorSubject, Observable} from "rxjs";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-header',
