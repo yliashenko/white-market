@@ -1,34 +1,57 @@
-<div class="container">
+<div class="container" *ngIf="product">
 
-  <div class="product-title">
+  <div class="product-container">
 
-    <div class="first-title">
-      <h1>{{ product.title }}</h1>
-      <h2>{{ product.price | currency }}</h2>
-    </div>
+    <div class="product-title">
 
-    <div class="second-title">
-      <p>Category: {{ product.category }}</p>
-      <p>{{ product.rating.count }} items left</p>
-    </div>
-
-  </div>
-
-  <div class="product-details">
-    <img src="{{product.image}}" alt="product-image">
-
-    <div class="info-group">
-
-      <div class="info">
-        <h3>Description</h3>
-        <p>{{ product.description }}</p>
+      <div class="first-title">
+        <h1>{{ product.title }}</h1>
+        <h2>{{ product.price | currency }}</h2>
       </div>
 
-      <mat-card-actions>
-        <button class="product button buy" mat-raised-button color="accent">Add to cart</button>
-      </mat-card-actions>
+      <div class="second-title">
+        <p>Category: {{ product.category }}</p>
+        <p>{{ product.rating.count }} items left</p>
+      </div>
+
     </div>
 
+    <div class="product-details">
+      <img src="{{product.image}}" alt="product-image">
 
+      <div class="info-group">
+
+        <div class="info">
+          <h3>Description</h3>
+          <p>{{ product.description }}</p>
+        </div>
+
+        <mat-card-actions>
+          <div *ngIf="authService.userAuthorized$ | async; then thenBlock else elseBlock"></div>
+          <ng-template #thenBlock>
+            <button
+              (click)="addProductToCart()"
+              class="product button buy"
+              mat-raised-button
+              color="accent"
+            >
+              Add to cart
+            </button>
+          </ng-template>
+
+          <ng-template #elseBlock>
+            <button
+              (click)="authService.openDialog()"
+              class="product button buy"
+              mat-raised-button
+              color="accent"
+            >
+              Add to cart
+            </button>
+          </ng-template>
+
+        </mat-card-actions>
+      </div>
+    </div>
   </div>
 </div>

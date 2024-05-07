@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {BrowserModule, provideClientHydration} from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 
 import {HttpClientModule} from "@angular/common/http";
 
@@ -9,7 +9,7 @@ import {provideAnimationsAsync} from '@angular/platform-browser/animations/async
 import {HeaderComponent} from './components/general/header/header.component';
 import {FooterComponent} from './components/general/footer/footer.component';
 import {CatalogComponent} from './components/catalog/catalog.component';
-import {BasketComponent} from './components/basket/basket.component';
+import {CartComponent} from './components/cart/cart.component';
 import {ProductDetailsComponent} from './components/product-details/product-details.component';
 import {AdminComponent} from './components/admin/admin.component';
 import {BaseComponent} from './components/base/base.component';
@@ -19,9 +19,27 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
 import {ProductCardComponent} from './components/catalog/product-card/product-card.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {TruncatePipe} from "./helpers/truncate.pipe";
+import {
+  AddProductDialogComponent
+} from './components/admin/dialog-box/product-dialog/add-product/add-product-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatInputModule} from '@angular/material/input';
+import {LoginDialogComponent} from './components/general/header/login/login-dialog.component';
+import {UserComponent} from './components/user/user.component';
+import {CartsListComponent} from './components/admin/carts-list/carts-list.component';
+import {
+  MatCell,
+  MatCellDef,
+  MatColumnDef, MatFooterCell, MatFooterCellDef, MatFooterRow, MatFooterRowDef,
+  MatHeaderCell,
+  MatHeaderCellDef, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
+  MatTable
+} from "@angular/material/table";
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatButtonToggle, MatButtonToggleGroup, MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -29,11 +47,15 @@ import {TruncatePipe} from "./helpers/truncate.pipe";
     HeaderComponent,
     FooterComponent,
     CatalogComponent,
-    BasketComponent,
+    CartComponent,
     ProductDetailsComponent,
     AdminComponent,
     BaseComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    AddProductDialogComponent,
+    LoginDialogComponent,
+    UserComponent,
+    CartsListComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,12 +68,29 @@ import {TruncatePipe} from "./helpers/truncate.pipe";
     HttpClientModule,
     MatProgressBarModule,
     FormsModule,
-    TruncatePipe
+    MatDialogModule,
+    MatInputModule,
+    TruncatePipe,
+    ReactiveFormsModule,
+    MatTable,
+    MatHeaderCell,
+    MatColumnDef,
+    MatHeaderCellDef,
+    MatCell,
+    MatCellDef,
+    MatHeaderRow,
+    MatHeaderRowDef,
+    MatRow,
+    MatRowDef,
+    MatSnackBarModule,
+    MatFooterRowDef,
+    MatFooterRow,
+    MatFooterCellDef,
+    MatFooterCell,
+    MatButtonToggleGroup,
+    MatButtonToggle
   ],
-  providers: [
-    provideClientHydration(),
-    provideAnimationsAsync()
-  ],
+  providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent]
 })
 export class AppModule {

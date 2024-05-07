@@ -1,1 +1,12 @@
-<p>admin works!</p>
+<div class="container">
+  <button (click)="openDialog()"
+          class="add-product"
+          mat-raised-button
+          color="accent"
+  >Add product
+  </button>
+
+  <div class="carts-container">
+    <app-carts-list [cartsList]="cartsList"></app-carts-list>
+  </div>
+</div>

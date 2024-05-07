@@ -1,59 +1,50 @@
 <div class="container">
 
-    <h1>Catalog</h1>
+  <h1>Catalog</h1>
 
-    <div class="visibility-controls">
+  <form class="visibility-controls" [formGroup]="filtersForm">
 
-      <div class="filter-box">
-<!--        <div class="filter">-->
-<!--          <input-->
-<!--            type="text"-->
-<!--            name="filter"-->
-<!--            id="filter"-->
-<!--            placeholder="search..."-->
-<!--            (input)="filterProductsByPattern($event)">-->
-<!--        </div>-->
+    <div class="filter-box">
+      <mat-form-field>
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="categoryName" class="category-selector">
+          <mat-option [value]="">all</mat-option>
 
-        <select (change)="filterProductsByCategory($event)"
-                id="filterByCategory"
-                class="category-selector"
-                [(ngModel)]="preSelectedCategory">
-          <label for="filterByCategory">Category: </label>
-          <option value="" selected>all</option>
-          <option *ngFor="let string of categories" [value]="string">{{ string }}</option>
-        </select>
-      </div>
+          @for (category of catalogService.categories; track category) {
+            <mat-option [value]="category">{{category}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
 
-      <div class="limit-sort-box">
-        <div class="limit-selector">
-          <label for="limit">Limit: </label>
-          <select (change)="loadProducts()"
-                  id="limit"
-                  name="limit"
-                  [(ngModel)]="selectedLimit">
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-          </select>
-        </div>
-        <div class="sort-selector">
-          <label for="sort">Sort: </label>
-          <select (change)="loadProducts()"
-                  id="sort"
-                  name="sort"
-                  [(ngModel)]="selectedSort">
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-          </select>
-        </div>
+    <div class="limit-sort-box">
+      <mat-form-field class="sort">
+        <mat-select
+          id="sort"
+          formControlName="sort">
+          <mat-option value="asc">Asc</mat-option>
+          <mat-option value="desc">Desc</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="limit-selector">
+        <mat-button-toggle-group class="limit"
+          formControlName="limit"
+          name="fontStyle"
+          aria-label="Font Style">
+          <mat-button-toggle value="5">5</mat-button-toggle>
+          <mat-button-toggle value="10">10</mat-button-toggle>
+          <mat-button-toggle value="20">20</mat-button-toggle>
+        </mat-button-toggle-group>
       </div>
     </div>
+  </form>
 
   <div class="products">
 
     <div class="catalog-box">
       <app-product-card
-        *ngFor="let item of visibleProducts"
+        *ngFor="let item of catalogService.visibleProducts$ | async"
         [product]="item">
       </app-product-card>
     </div>

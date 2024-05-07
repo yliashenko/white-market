@@ -3,9 +3,7 @@
   flex-direction: column;
   justify-content: center;
 
-  padding: 50px;
-
-  background-color: whitesmoke;
+  padding: 120px 50px 100px 50px;
 }
 
 .catalog-box {
@@ -16,34 +14,30 @@
 
 .products {
   display: flex;
-  /*justify-content: center;*/
 }
 
 .visibility-controls {
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
 
-  margin: 0 11px 0 10px;
+  margin: 30px 11px 20px 10px;
+
 }
 
 .filter-box, .limit-sort-box {
-  /*margin-bottom: 20px;*/
-
   display: flex;
   flex-direction: row;
 }
 
-input, select {
-  margin: 20px 0 30px 0;
+.sort {
+  width: 100px;
+  margin-right: 20px;
 }
 
 h1 {
-  margin: 20px 16px 0 16px;
+  margin: 20px 16px 0 10px;
 
   font-weight: bold;
-}
-
-.limit-selector, .filter {
-  margin-right: 20px;
 }

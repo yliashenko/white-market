@@ -1,0 +1,13 @@
+.container {
+  padding: 100px 50px 50px 50px;
+}
+
+.container button {
+  background-color: seagreen;
+}
+
+.add-product {
+  display: flex;
+  flex-direction: row;
+
+}

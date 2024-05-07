@@ -1,9 +1,11 @@
 <div class="container">
   <mat-card class="product-card">
     <div class="product-details-group">
+
       <mat-card-header>
-        <mat-card-title>{{ product.title | truncate:37 }}</mat-card-title>
+        <mat-card-title>{{ product.title }}</mat-card-title>
       </mat-card-header>
+
       <mat-card-content>
         <img mat-card-md-image src="{{product.image}}" alt="productImage">
         <mat-card-subtitle>{{ product.category }}</mat-card-subtitle>
@@ -11,9 +13,38 @@
         <h3 class="price">{{ product.price | currency }}</h3>
       </mat-card-content>
     </div>
+
     <mat-card-actions>
-      <a class="product button more" mat-button [routerLink]="[product.id]">More</a>
-      <button class="product button buy" mat-raised-button color="accent">Buy</button>
+      <a
+        class="product button more"
+        mat-button
+        [routerLink]="[product.id]"
+      >
+        More
+      </a>
+
+      <div *ngIf="authService.userAuthorized$ | async; then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock>
+        <button
+          (click)="addProductToCart()"
+          class="product button buy"
+          mat-raised-button
+        >
+          Buy
+        </button>
+      </ng-template>
+
+      <ng-template #elseBlock>
+        <button
+          (click)="authService.openDialog()"
+          class="product button buy"
+          mat-raised-button
+        >
+          Buy
+        </button>
+      </ng-template>
+
     </mat-card-actions>
+
   </mat-card>
 </div>

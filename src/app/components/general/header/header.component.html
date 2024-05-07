@@ -11,11 +11,37 @@
     <div class="toolbar no-select">
       <button class="toolbar button" mat-button routerLink="catalog">CATALOG</button>
       <button class="toolbar button" mat-button routerLink="admin">ADMIN</button>
-      <button class="toolbar button" mat-button routerLink="basket">
-        <mat-icon class="icon" aria-hidden="false">
-          <span class="material-symbols-outlined">shopping_basket</span>
-        </mat-icon>
-      </button>
+
+      <div *ngIf="authService.userAuthorized$ | async; then thenBlock else elseBlock"></div>
+
+      <ng-template #thenBlock>
+        <button class="toolbar button" mat-button routerLink="cart">
+          <mat-icon class="icon" aria-hidden="false">
+            <span class="material-symbols-outlined">shopping_basket</span>
+          </mat-icon>
+          {{ cartCount$ | async }}
+        </button>
+
+        <button (click)="authService.logout()"
+                class="toolbar button"
+                mat-button
+        >
+          <mat-icon class="icon" aria-hidden="false">
+            <span class="material-symbols-outlined">person</span>-->
+          </mat-icon>
+            <span class="user">{{ authService.currentUserName }}</span>
+        </button>
+      </ng-template>
+
+      <ng-template #elseBlock>
+        <button (click)="authService.openDialog()"
+                class="toolbar button"
+                mat-button>
+          <mat-icon class="icon" aria-hidden="false">
+            <span class="material-symbols-outlined">login</span>
+          </mat-icon>
+        </button>
+      </ng-template>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>

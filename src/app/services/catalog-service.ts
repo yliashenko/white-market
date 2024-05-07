@@ -1,0 +1,41 @@
+import {Injectable} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Params} from '@angular/router';
+import {IProduct} from "../models/product";
+import {Url} from "../app.config";
+import {BehaviorSubject} from "rxjs";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CatalogService {
+  public readonly visibleProducts$ = new BehaviorSubject<IProduct[]>([]);
+
+  categories: string[] = [];
+
+  constructor(private httpClient: HttpClient) {
+  }
+
+  loadProducts(params: Params) {
+    return this.httpClient
+      .get<IProduct[]>(`${Url}/products`, {params})
+      .subscribe(data => this.visibleProducts$.next(data));
+  }
+
+  loadProductsByCategory(params: Params, categoryName: string) {
+    return this.httpClient
+      .get<IProduct[]>(`${Url}/products/category/${categoryName}`, {params})
+      .subscribe(data => this.visibleProducts$.next(data));
+  }
+
+  loadProductDetails(id: number) {
+    return this.httpClient.get<IProduct>(`${Url}/products/${id}`);
+  }
+
+  loadAllCategoriesList() {
+    this.httpClient.get<string[]>(`${Url}/products/categories`)
+      .subscribe(data => {
+        this.categories = data;
+      });
+  }
+}

@@ -1,0 +1,46 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="product-form">
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title" placeholder="Product title" required>
+  </mat-form-field>
+
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description" placeholder="Product description..." required></textarea>
+  </mat-form-field>
+
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label>Price</mat-label>
+    <input matInput formControlName="price" placeholder="Product price" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Category:</mat-label>
+    <select matNativeControl formControlName="category" required>
+      <option value="Electronics">Electronics</option>
+      <option value="Jewelry">Jewelry</option>
+      <option value="Men's clothing">Men's clothing</option>
+      <option value="Women's clothing">Women's clothing</option>
+    </select>
+  </mat-form-field>
+
+  <mat-dialog-actions>
+    <button
+      matDialogClose
+      mat-button
+      color="accent"
+      type="button"
+    >
+      Cancel
+    </button>
+
+    <button
+      mat-raised-button
+      color="accent"
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      Add product
+    </button>
+  </mat-dialog-actions>
+</form>

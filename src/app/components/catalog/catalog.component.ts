@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ProductsService} from "../../services/products-service";
-import {IProduct} from "../../models/product";
-import {Subscription} from "rxjs";
+import {FormBuilder} from '@angular/forms';
+import {CatalogService} from "../../services/catalog-service";
+import {delay, map, startWith} from "rxjs";
+import {UserService} from "../../services/user.service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-catalog',
@@ -9,86 +11,39 @@ import {Subscription} from "rxjs";
   styleUrl: './catalog.component.css'
 })
 export class CatalogComponent implements OnInit {
+  public readonly filtersForm = this.formBuilder.group({
+    limit: '20',
+    sort: 'asc',
+    categoryName: '',
+  });
 
-  productsSubscription: Subscription;
-  categoriesSubscription: Subscription;
-
-  products: IProduct[] = [];
-  visibleProducts: IProduct[] = [];
-
-  categories: string[] = [];
-  preSelectedCategory = this.visibleProducts;
-
-  selectedLimit = '10';
-  selectedSort = 'asc';
-
-  constructor(private productService: ProductsService) {
+  constructor(
+    public catalogService: CatalogService,
+    public formBuilder: FormBuilder
+  ) {
   }
 
   ngOnInit(): void {
-    this.getAllProducts();
-    this.loadProducts();
     this.getCategories();
-  }
 
-  getAllProducts() {
-    this.productsSubscription = this.productService
-      .getAllProductsCatalog()
-      .subscribe(data => {
-        this.products = data;
+    this.filtersForm.valueChanges
+      .pipe(startWith(this.filtersForm.value))
+      .subscribe((value) => {
+        const params = {...value};
+
+        if (!params.categoryName) {
+          delete params.categoryName;
+          this.catalogService.loadProducts(params);
+        } else {
+          const categoryName = params.categoryName;
+          delete params.categoryName;
+          this.catalogService.loadProductsByCategory(params, categoryName);
+        }
+
       });
-
-    return this.products;
-  }
-
-  loadProducts() {
-    this.productsSubscription = this.productService
-      .getProductsCatalogLimitedSorted(
-        this.selectedLimit,
-        this.selectedSort
-      )
-      .subscribe(data => {
-        this.visibleProducts = data;
-      });
-
-    return this.visibleProducts;
-  }
-
-  filterProductsByPattern(event: Event) {
-    let productName = (event.target as HTMLInputElement)!!.value;
-
-    if (productName === '') {
-      this.visibleProducts = this.products;
-      return this.visibleProducts;
-    } else {
-      this.visibleProducts = this.products.filter(p => p.title.includes(productName));
-      return this.visibleProducts;
-    }
-  }
-
-  filterProductsByCategory(event: Event) {
-    let categoryName = (event.target as HTMLSelectElement)!.value;
-
-    if (categoryName === '') {
-      this.visibleProducts = this.products;
-      return this.visibleProducts;
-    } else {
-      this.visibleProducts = this.products.filter(p => p.category.includes(categoryName));
-      return this.visibleProducts;
-    }
   }
 
   getCategories() {
-    this.categoriesSubscription = this.productService
-      .getAllCategoriesList()
-      .subscribe(data => {
-        this.categories = data;
-      });
-
-    return this.categories;
+    this.catalogService.loadAllCategoriesList();
   }
-
-// hasItems(): boolean {
-//   return this.filteredProducts.length > 0;
-// }
 }
