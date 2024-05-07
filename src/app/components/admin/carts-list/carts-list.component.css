@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  width: 40%;
+  margin: 50px;
+
+  padding: 50px;
+
+  background-color: white;
+
+  border-radius: 10px;
+
+  box-shadow: 1px 1px 3px grey;
+}
+
+td div {
+  display: flex;
+  flex-direction: row;
+}
+
+td div p:nth-child(1) {
+  margin-right: 10px;
+}
