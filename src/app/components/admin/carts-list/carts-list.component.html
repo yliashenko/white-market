@@ -1,42 +1,45 @@
 <div class="container">
   <h2>Carts list</h2>
 
-  <table mat-table>
+  <table mat-table [dataSource]="cartsListWithTotal">
 
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>Cart ID</th>
-      <td mat-cell *matCellDef="let cart">{{cart.id}}</td>
+      <td mat-cell *matCellDef="let cart">{{ cart.id }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>
 
     <ng-container matColumnDef="userId">
       <th mat-header-cell *matHeaderCellDef>User ID</th>
-      <td mat-cell *matCellDef="let cart">{{cart.userId}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="date">
-      <th mat-header-cell *matHeaderCellDef>Date</th>
-      <td mat-cell *matCellDef="let cart">{{cart.date | date}}</td>
+      <td mat-cell *matCellDef="let cart">{{ cart.userId }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>
 
     <ng-container matColumnDef="products">
       <th mat-header-cell *matHeaderCellDef>Products</th>
       <td mat-cell *matCellDef="let cart">
         <div *ngFor="let item of cart.products">
-          <p>Product ID: {{item.productId}}</p>
-          <p>Quantity: {{item.quantity}}</p>
+          <p>{{ item.productName }}</p>
+          <p>Quantity: {{ item.quantity }}</p>
         </div>
       </td>
+      <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>
 
-    <ng-container matColumnDef="total">
-      <th mat-header-cell *matHeaderCellDef>Total Price</th>
-      <td mat-cell *matCellDef="let cart">{{ cart.total | currency:'USD' }}</td>
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let cart">{{ cart.date | date }}</td>
+      <td mat-footer-cell *matFooterCellDef>TOTAL:</td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayColumns.concat('total')"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayColumns.concat('total')"></tr>
+    <ng-container matColumnDef="totalPrice">
+      <th mat-header-cell *matHeaderCellDef>$, Total Price</th>
+      <td mat-cell *matCellDef="let cart">{{ cart.totalPrice | currency:'USD' }}</td>
+      <td mat-footer-cell *matFooterCellDef>{{ allCartsTotal | currency:'USD' }}</td>
+    </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayColumns"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayColumns"></tr>
   </table>
 </div>

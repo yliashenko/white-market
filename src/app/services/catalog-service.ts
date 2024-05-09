@@ -1,22 +1,30 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Params} from '@angular/router';
 import {IProduct} from "../models/product";
 import {Url} from "../app.config";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class CatalogService {
+
+  public allProducts: Observable<IProduct[]>;
   public readonly visibleProducts$ = new BehaviorSubject<IProduct[]>([]);
 
   categories: string[] = [];
 
   constructor(private httpClient: HttpClient) {
+    this.allProducts = this.loadAllProducts();
   }
 
-  loadProducts(params: Params) {
+  loadAllProducts() {
+    return this.httpClient.get<IProduct[]>(`${Url}/products`);
+  }
+
+  loadProducts(params?: Params) {
     return this.httpClient
       .get<IProduct[]>(`${Url}/products`, {params})
       .subscribe(data => this.visibleProducts$.next(data));

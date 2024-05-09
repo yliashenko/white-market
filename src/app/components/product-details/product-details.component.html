@@ -10,8 +10,8 @@
       </div>
 
       <div class="second-title">
-        <p>Category: {{ product.category }}</p>
-        <p>{{ product.rating.count }} items left</p>
+        <p>CATEGORY: {{ product.category | uppercase}}</p>
+        <p>{{ product.rating.count }} ITEMS LEFT</p>
       </div>
 
     </div>
@@ -22,7 +22,7 @@
       <div class="info-group">
 
         <div class="info">
-          <h3>Description</h3>
+          <h3>DESCRIPTION</h3>
           <p>{{ product.description }}</p>
         </div>
 

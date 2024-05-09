@@ -8,9 +8,11 @@
 
       <mat-card-content>
         <img mat-card-md-image src="{{product.image}}" alt="productImage">
-        <mat-card-subtitle>{{ product.category }}</mat-card-subtitle>
-        <p>{{ product.description.slice(0, 75) }}</p>
-        <h3 class="price">{{ product.price | currency }}</h3>
+
+        <div>
+          <p>{{ product.description.slice(0, 75) }}</p>
+          <h3 class="price">{{ product.price | currency }}</h3>
+        </div>
       </mat-card-content>
     </div>
 

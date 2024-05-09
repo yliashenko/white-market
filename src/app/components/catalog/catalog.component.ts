@@ -8,6 +8,7 @@ import {startWith} from "rxjs";
   templateUrl: './catalog.component.html',
   styleUrl: './catalog.component.css'
 })
+
 export class CatalogComponent implements OnInit {
   public readonly filtersForm = this.formBuilder.group({
     limit: '20',

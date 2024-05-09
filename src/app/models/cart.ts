@@ -3,6 +3,10 @@ export interface ICartProduct {
   quantity: number
 }
 
+export interface ICartProductWithName extends ICartProduct {
+  productName: string
+}
+
 export interface IAddToCart {
   userId: number,
   date: string,
@@ -20,4 +24,12 @@ export interface ICart {
   userId: number,
   date: string,
   products: ICartProduct[]
+}
+
+export interface ICartWithTotals {
+  id: number,
+  userId: number,
+  date: string,
+  products: ICartProduct[]
+  totalPrice: number
 }
