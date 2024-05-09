@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {delay, Observable, of, Subscription, switchMap, tap} from "rxjs";
+import {Observable, of, Subscription, switchMap, tap} from "rxjs";
 import {CartService} from "../../../services/cart.service";
-import {ICart, ICartProductWithName, ICartWithTotals} from "../../../models/cart";
+import {ICart, ICartWithTotals} from "../../../models/cart";
 import {IProduct} from "../../../models/product";
 import {CatalogService} from "../../../services/catalog-service";
 
