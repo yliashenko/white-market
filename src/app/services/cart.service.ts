@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {ICart} from "../models/cart";
-import {Url} from "../app.config";
-import {Product} from "../models/product";
-import {BehaviorSubject, Observable} from "rxjs";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import { Injectable } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { ICart } from "../models/cart";
+import { Url } from "../app.config";
+import { Product } from "../models/product";
+import { BehaviorSubject } from "rxjs";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: 'root'

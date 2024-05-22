@@ -1,7 +1,6 @@
-import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {CartService} from "../../services/cart.service";
-import {Product} from "../../models/product";
-import {map, Subscription} from "rxjs";
+import { Component } from '@angular/core';
+import { CartService } from "../../services/cart.service";
+import { map } from "rxjs";
 
 @Component({
   selector: 'app-cart',

@@ -1,10 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {switchMap, Subscription, delay} from 'rxjs';
+import { switchMap, Subscription } from 'rxjs';
 import { CatalogService } from "../../services/catalog-service";
 import { AuthService } from "../../services/auth.service";
 import { CartService } from "../../services/cart.service";
-import {Product} from "../../models/product";
+import { Product } from "../../models/product";
 
 @Component({
   selector: 'app-product-details',
