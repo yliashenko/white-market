@@ -4,7 +4,7 @@
       <mat-icon class="icon" aria-hidden="false">
         <span class="material-symbols-outlined">storefront</span>
       </mat-icon>
-      <span>WHITE MARKET</span>
+      <span routerLink="">WHITE MARKET</span>
     </div>
     <span class="spacer"></span>
 
@@ -21,7 +21,7 @@
           <mat-icon class="icon" aria-hidden="false">
             <span class="material-symbols-outlined">shopping_basket</span>
           </mat-icon>
-          {{ cartCount$ | async }}
+          {{ (cartService.products | async)?.length ?? 0 }}
         </button>
 
         <button (click)="authService.logout()"

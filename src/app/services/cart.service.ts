@@ -2,58 +2,49 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ICart} from "../models/cart";
 import {Url} from "../app.config";
-import {IProduct} from "../models/product";
-import {BehaviorSubject} from "rxjs";
+import {Product} from "../models/product";
+import {BehaviorSubject, Observable} from "rxjs";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  cart: IProduct[] = [];
-  private _cartItemCount = new BehaviorSubject<number>(0);
+  public readonly products = new BehaviorSubject<Product[]>([]);
 
   constructor(
     private httpClient: HttpClient,
     private snackBar: MatSnackBar) {
 
     this.loadInitialCart();
+
+    this.products.subscribe((data) => {
+      localStorage.setItem('cart', JSON.stringify(data));
+    })
   }
 
   private loadInitialCart() {
     const storedCart = localStorage.getItem('cart');
     if (storedCart) {
-      this.cart = JSON.parse(storedCart);
-      this._cartItemCount.next(this.cart.length);
+      this.products.next(JSON.parse(storedCart));
     } else {
-      this.cart = [];
+      this.products.next([]);
     }
   }
 
-  get cartCount() {
-    return this._cartItemCount.asObservable();
-  }
-
-  addToCart(product: IProduct) {
-    this.cart.push(product);
-    this.updateCartStorage();
+  addToCart(product: Product) {
+    this.products.next([
+      ...this.products.value,
+      product
+    ]);
 
     this.openProductAddedSnackBar();
   }
 
-  removeFromCartCount(product: IProduct) {
-    const index = this.cart.findIndex(p => p.id === product.id);
-    if (index > -1) {
-      this.cart.splice(index, 1);
-      this.updateCartStorage();
+  removeProduct(product: Product) {
+    this.products.next(this.products.value.filter((item) => item.id !== product.id));
 
-      this.openProductRemovedSnackBar();
-    }
-  }
-
-  private updateCartStorage() {
-    localStorage.setItem('cart', JSON.stringify(this.cart));
-    this._cartItemCount.next(this.cart.length);
+    this.openProductRemovedSnackBar();
   }
 
   getCartsInDateRangeLimitedSorted(
@@ -79,7 +70,7 @@ export class CartService {
     this.snackBar.open(
       "The product has been successfully added to the cart",
       'Ok', {
-        duration: 3000
+        duration: 3000,
       });
   }
 

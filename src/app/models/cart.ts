@@ -3,10 +3,6 @@ export interface ICartProduct {
   quantity: number
 }
 
-export interface ICartProductWithName extends ICartProduct {
-  productName: string
-}
-
 export interface IAddToCart {
   userId: number,
   date: string,

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Params} from '@angular/router';
-import {IProduct} from "../models/product";
+import {Product} from "../models/product";
 import {Url} from "../app.config";
 import {BehaviorSubject, Observable} from "rxjs";
 
@@ -11,8 +11,8 @@ import {BehaviorSubject, Observable} from "rxjs";
 
 export class CatalogService {
 
-  public allProducts: Observable<IProduct[]>;
-  public readonly visibleProducts$ = new BehaviorSubject<IProduct[]>([]);
+  public allProducts: Observable<Product[]>;
+  public readonly visibleProducts$ = new BehaviorSubject<Product[]>([]);
 
   categories: string[] = [];
 
@@ -21,23 +21,23 @@ export class CatalogService {
   }
 
   loadAllProducts() {
-    return this.httpClient.get<IProduct[]>(`${Url}/products`);
+    return this.httpClient.get<Product[]>(`${Url}/products`);
   }
 
   loadProducts(params?: Params) {
     return this.httpClient
-      .get<IProduct[]>(`${Url}/products`, {params})
+      .get<Product[]>(`${Url}/products`, {params})
       .subscribe(data => this.visibleProducts$.next(data));
   }
 
   loadProductsByCategory(params: Params, categoryName: string) {
     return this.httpClient
-      .get<IProduct[]>(`${Url}/products/category/${categoryName}`, {params})
+      .get<Product[]>(`${Url}/products/category/${categoryName}`, {params})
       .subscribe(data => this.visibleProducts$.next(data));
   }
 
   loadProductDetails(id: number) {
-    return this.httpClient.get<IProduct>(`${Url}/products/${id}`);
+    return this.httpClient.get<Product>(`${Url}/products/${id}`);
   }
 
   loadAllCategoriesList() {

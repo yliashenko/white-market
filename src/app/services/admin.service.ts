@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {IProduct} from "../models/product";
+import {Product} from "../models/product";
 import {Url} from "../app.config";
 import {HttpClient} from "@angular/common/http";
 
@@ -7,13 +7,13 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class AdminService {
-  productsAdded: IProduct[] = [];
+  productsAdded: Product[] = [];
 
   constructor(private httpClient: HttpClient) {
   }
 
-  addProduct(product: IProduct) {
-    return this.httpClient.post<IProduct>(`${Url}/products`, product)
+  addProduct(product: Product) {
+    return this.httpClient.post<Product>(`${Url}/products`, product)
       .subscribe((data) => {
         this.productsAdded.push(data);
       });

@@ -18,7 +18,7 @@
 
 h1 {
   margin: 20px 16px 30px 10px;
-
+  font-family: "Avenir Next", serif;
   font-weight: bold;
 }
 
@@ -33,8 +33,6 @@ th {
 .users-table {
   padding: 20px;
   border-collapse: collapse;
-  /*border-radius: 10px;*/
-  /*box-shadow: 1px 1px 3px grey;*/
 }
 
 .users-table-cell {
@@ -55,6 +53,10 @@ th {
 
 .empty-cart button {
   margin: 50px;
+}
+
+ng-container .actions {
+  width: 10%;
 }
 
 tr > td.mat-mdc-footer-cell.mdc-data-table__cell.cdk-footer-cell.cdk-column-title.mat-column-title,

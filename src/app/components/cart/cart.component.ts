@@ -1,45 +1,23 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {CartService} from "../../services/cart.service";
-import {IProduct} from "../../models/product";
-import {Subscription} from "rxjs";
-import {CatalogService} from "../../services/catalog-service";
+import {Product} from "../../models/product";
+import {map, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent implements OnInit, OnDestroy{
+export class CartComponent {
 
-  displayColumns: string[] = ['id', 'title', 'price'];
-  products: IProduct[] = [];
-  private subscriptions: Subscription = new Subscription();
-  totalPrice: number = 0;
+  displayColumns: string[] = ['id', 'title', 'price', 'actions'];
+
+  public readonly totalPrice = this.cartService.products.pipe(
+    map((products) => products
+      .reduce((acc, {price}) => acc + price, 0))
+  );
 
   constructor(
-    private _cartService: CartService,
-    private _catalogService: CatalogService) {
-  }
-
-  ngOnInit(): void {
-    this.getCartProducts();
-    this.getCartTotalPrice();
-  }
-
-  getCartProducts(){
-    this.products = this._cartService.cart;
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.unsubscribe();
-  }
-
-  getCartTotalPrice(){
-    this.totalPrice = 0;
-    if (this.products && this.products.length > 0) {
-      this.products.forEach(item => {
-        this.totalPrice += item.price;
-      });
-    }
+    public cartService: CartService) {
   }
 }

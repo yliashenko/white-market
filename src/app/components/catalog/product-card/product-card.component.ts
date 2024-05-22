@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {IProduct} from "../../../models/product";
+import {Product} from "../../../models/product";
 import {AuthService} from "../../../services/auth.service";
 import {CartService} from "../../../services/cart.service";
 
@@ -9,7 +9,7 @@ import {CartService} from "../../../services/cart.service";
   styleUrl: './product-card.component.css'
 })
 export class ProductCardComponent {
-  @Input() product: IProduct;
+  @Input() product: Product;
 
   constructor(
     public authService: AuthService,

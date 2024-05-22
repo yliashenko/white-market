@@ -5,13 +5,13 @@ import {CatalogComponent} from "./components/catalog/catalog.component";
 import {ProductDetailsComponent} from "./components/product-details/product-details.component";
 import {CartComponent} from "./components/cart/cart.component";
 import {AdminComponent} from "./components/admin/admin.component";
-// import {catalogResolver, productResolver} from "./components/product-details/product.resolver";
+import {productResolver} from "./components/product-details/product.resolver";
 
 const routes: Routes = [
   {path: '', component: BaseComponent},
 
   {path: 'catalog', component: CatalogComponent},
-  {path: 'catalog/:id', component: ProductDetailsComponent},
+  {path: 'catalog/:id', component: ProductDetailsComponent, resolve: { product: productResolver }},
   {path: 'admin', component: AdminComponent},
   {path: 'cart', component: CartComponent},
 

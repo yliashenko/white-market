@@ -20,6 +20,15 @@ td div {
   justify-content: space-between;
 }
 
+th {
+  font-weight: bold;
+}
+
 td div p:nth-child(1) {
   margin-right: 10px;
+}
+
+tr > td.mat-mdc-footer-cell.mdc-data-table__cell.cdk-footer-cell.cdk-column-date.mat-column-date,
+tr > td.mat-mdc-footer-cell.mdc-data-table__cell.cdk-footer-cell.cdk-column-totalPrice.mat-column-totalPrice{
+  font-weight: bold;
 }

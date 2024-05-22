@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable, of, Subscription, switchMap, tap} from "rxjs";
 import {CartService} from "../../../services/cart.service";
 import {ICart, ICartWithTotals} from "../../../models/cart";
-import {IProduct} from "../../../models/product";
+import {Product} from "../../../models/product";
 import {CatalogService} from "../../../services/catalog-service";
 
 @Component({
@@ -12,15 +12,14 @@ import {CatalogService} from "../../../services/catalog-service";
 })
 export class CartsListComponent implements OnInit, OnDestroy {
 
-  cartsList$: Observable<ICart[]>;
-  cartsListWithTotal: ICartWithTotals[] = [];
+  displayColumns: string[] = ['id', 'userId', 'products', 'date', 'totalPrice'];
 
+  cartsListWithTotal: ICartWithTotals[] = [];
   allCartsTotal: number = 0;
 
+  private cartsList$: Observable<ICart[]>;
   private subscriptions: Subscription = new Subscription();
-  private preparedProducts: { id: number, product: IProduct }[] = [];
-
-  displayColumns: string[] = ['id', 'userId', 'products', 'date', 'totalPrice'];
+  private preparedProducts: { id: number, product: Product }[] = [];
 
   constructor(
     private _cartService: CartService,

@@ -9,16 +9,10 @@ import {Observable} from "rxjs";
   styleUrl: './header.component.css'
 })
 
-export class HeaderComponent implements OnInit {
-
-  cartCount$: Observable<number>;
+export class HeaderComponent {
 
   constructor(
     public authService: AuthService,
-    private _cartService: CartService) {
-  }
-
-  ngOnInit() {
-    this.cartCount$ = this._cartService.cartCount;
+    public cartService: CartService) {
   }
 }
