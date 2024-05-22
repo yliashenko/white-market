@@ -1,4 +1,5 @@
 # WhiteMarket
+This project was created as a final course work within "ITVDN Front-end developer" cource.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.0.
 
